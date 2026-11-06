@@ -2,8 +2,9 @@
 // work-tracking plugin hook. Hooks cannot call MCP tools, so they inject
 // instructions and Claude does the Linear/ClickUp calls via the plugin skills.
 //   SessionStart -> first run in a project: run setup. Otherwise: find/create the issue.
-//   PostToolUse  -> after git commit / push / gh pr create|merge: checkpoint comment
-//   Stop         -> once per session, after real work: update issue, offer the brief
+//   PostToolUse  -> file edits or Linear writes mark the session as real work;
+//                   after git commit / push / gh pr create|merge: checkpoint comment
+//   Stop         -> once per session, after real work (edits, commits or Linear writes): update issue, offer the brief
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
@@ -52,6 +53,12 @@ if (event === 'SessionStart') {
       'Put the issue ID in commit messages and the PR description.');
   }
 } else if (event === 'PostToolUse') {
+  const tool = input.tool_name || '';
+  // Editing files or touching Linear counts as work, even if nothing is committed.
+  if (config && /^(Edit|Write|MultiEdit|NotebookEdit)$|^mcp__.*__(save_issue|save_comment)$/.test(tool)) {
+    const state = readState();
+    if (!state.hadWork) { state.hadWork = true; writeState(state); }
+  }
   const cmd = input.tool_input?.command || '';
   if (config && /\bgit\s+commit\b|\bgh\s+pr\s+(create|merge)\b|\bgit\s+push\b/.test(cmd)) {
     const state = readState();

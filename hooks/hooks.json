@@ -4,7 +4,7 @@
       { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/tracking-hook.mjs\"" } ] }
     ],
     "PostToolUse": [
-      { "matcher": "Bash", "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/tracking-hook.mjs\"" } ] }
+      { "matcher": "Bash|Edit|Write|MultiEdit|NotebookEdit|mcp__.*__save_(issue|comment)", "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/tracking-hook.mjs\"" } ] }
     ],
     "Stop": [
       { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/tracking-hook.mjs\"" } ] }
