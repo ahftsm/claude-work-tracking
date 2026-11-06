@@ -5,7 +5,7 @@ description: Draft the end-of-day team brief for ClickUp - what was worked on, h
 
 # End-of-day brief
 
-The short message teammates trade at the end of each work session. Draft first; post only after the user confirms. The target is `clickup` in `.work-tracking.json`; if absent, ask where to post.
+The short message teammates trade at the end of each work session. Draft first; post only after the user confirms. The brief is posted as a **ClickUp Chat post** (not a Linear comment) to the channel in `clickup.briefChannel` in `.work-tracking.json`; if absent, call `clickup_get_chat_channels` and ask which channel.
 
 ## Gather (in parallel)
 
@@ -49,5 +49,7 @@ Suggested by Claude
 - Time is an estimate and labelled as one. Never invent hours.
 - Every item links its Linear issue; items without one are flagged so the user can create it.
 - Under about 25 lines. Facts, not narration.
-- Show the draft and ask "Post to ClickUp?" Post only on a clear yes, to the target named. Sending is outward-facing.
+- Show the draft and ask "Post to ClickUp?" Post only on a clear yes. Sending is outward-facing.
+- Post with `clickup_send_chat_message`: `type: "post"`, `post_type: "Update"`, `post_title: "Daily brief - <name> - <date>"`, `channel_id` from the config, and the brief body as markdown `content`.
+- Linear is for work tracking only. Do not copy the brief into Linear.
 - Offer to answer end-of-session questions (what is left, what is risky, what to do tomorrow) from Linear state.

@@ -12,13 +12,13 @@ Goal: leave the project with a `.work-tracking.json` so every later session star
 1. **Check connectors.** Call Linear `whoami`. If Linear tools are missing, tell the user: open Claude Settings, then Connectors, connect Linear, and start a new session. Do the same check for ClickUp; ClickUp is optional, so continue without it if it is missing and set `clickup` to null.
 2. **Find the team.** `list_teams`. One team: use it. Several: ask which one.
 3. **Find the project.** `list_projects` for that team. Match by the repo folder name or git remote name. If one clearly matches, use it. If none or several, ask once: pick one, create a new one, or none.
-4. **ClickUp (if connected).** Ask once where the daily brief goes (a list, task or chat channel). Use `clickup_get_workspace_hierarchy` to offer real options.
+4. **ClickUp (if connected).** Ask once which chat channel gets the daily brief post. Use `clickup_get_chat_channels` to offer real channels.
 5. **Save** `.work-tracking.json` in the project root:
 
 ```json
 {
   "linear": { "team": "ENG", "project": "Project name" },
-  "clickup": { "briefTarget": "list or channel id", "name": "readable name" }
+  "clickup": { "briefChannel": "chat channel id", "name": "channel name" }
 }
 ```
 
