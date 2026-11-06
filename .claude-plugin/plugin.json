@@ -1,6 +1,6 @@
 {
   "name": "work-tracking",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Automatic Linear tracking and a daily ClickUp brief for any project. Starts itself every session: finds or creates the Linear issue, checkpoints after commits, and drafts the end-of-day brief.",
   "author": { "name": "Debate" },
   "keywords": ["linear", "clickup", "tracking", "standup"]

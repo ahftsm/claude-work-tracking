@@ -25,6 +25,10 @@ Goal: leave the project with a `.work-tracking.json` so every later session star
 6. Tell the user it is saved, that it can be committed so teammates share it, and that creating a file named `.work-tracking.off` turns tracking off for this project.
 7. Continue with `work-tracking:linear-sync` for the task in front of you.
 
+## If setup stalls
+
+Do not leave the session untracked. Use the first Linear team, find or create the issue with `work-tracking:linear-sync`, and ask which project afterwards.
+
 ## Rules
 
 - Never create Linear projects or issues during setup without showing the user first.
