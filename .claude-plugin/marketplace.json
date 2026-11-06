@@ -1,0 +1,11 @@
+{
+  "name": "debate-tools",
+  "owner": { "name": "Debate" },
+  "plugins": [
+    {
+      "name": "work-tracking",
+      "source": "./",
+      "description": "Automatic Linear tracking and a daily ClickUp brief for any project."
+    }
+  ]
+}
